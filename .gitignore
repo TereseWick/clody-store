@@ -1,0 +1,23 @@
+
+#N  ode/Next
+node_modules/
+.next/
+out/
+dist/
+.DS_Store
+*.log
+
+# Env files
+.env
+.env.local
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+prisma/*db
+prisma/*db-journal
+
+# Vercel & annet
+.vercel/
+.turbo/
+coverage/
