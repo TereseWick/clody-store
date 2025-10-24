@@ -4,10 +4,14 @@ import { notFound } from 'next/navigation';
 import { nok } from '@/lib/format';
 import AddToCart from './AddToCart';
 
-type Props = { params: { slug: string } };
 
-export default async function ProductPage({ params }: Props) {
-  const product = await prisma.product.findUnique({ where: { slug: params.slug }, include: { images: true } });
+export default async function ProductPage({ 
+  params,
+}:  {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const product = await prisma.product.findUnique({ where: { slug }, include: { images: true } });
   if (!product || !product.active) return notFound();
 
   const img = product.images[0]?.url ?? '/placeholder.png';

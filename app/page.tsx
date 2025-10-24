@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import ProductCard from '@/components/ProductCard';
+import VideoBanner from '@/components/VideoBanner';
 
 export default async function HomePage() {
   const products = await prisma.product.findMany({
@@ -14,12 +15,19 @@ export default async function HomePage() {
     <div className="space-y-10">
       <section className="rounded-3xl border p-8 text-center">
         <h1 className="text-3xl font-semibold">Håndlagde vesker</h1>
-        <p className="text-gray-600 mt-2">Små serier, laget i Norge. Limited drops.</p>
+        <p className="text-gray-600 mt-2">Håndbroderte og heklede vesker med personlige preg. Limited drops.</p>
         <Link href="/shop" className="inline-block mt-6 rounded-full border px-5 py-2">Se butikken</Link>
       </section>
 
+      <section className="rounded-2xl overflow-hidden border border-brand-200 bg-white">
+       <VideoBanner />
+      </section>
+
       <section>
-        <h2 className="text-xl font-medium mb-4">Nye produkter</h2>
+        <div className="flex items-center justify-between mb-4">
+        <h2 className="text-xl font-semibold text-brand-300">Nye produkter</h2>
+        <Link className="underline" href="/shop">Butikk</Link>
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {products.map(p => <ProductCard key={p.id} product={p} />)}
         </div>
